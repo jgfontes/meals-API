@@ -10,7 +10,7 @@ import org.springframework.web.server.ResponseStatusException;
 @Service
 public class MealsService {
 
-    private static String getRandomImageUrl = "https://www.themealdb.com/api/json/v1/1/random.php";
+    private static String getRandomMealUrl = "https://www.themealdb.com/api/json/v1/1/random.php";
     private static String getAllByFirstLetterUrl = "https://www.themealdb.com/api/json/v1/1/search.php?f=b";
 
     @Autowired
@@ -20,7 +20,7 @@ public class MealsService {
         try {
             HttpHeaders headers = new HttpHeaders();
 //            ResponseEntity<String> response = restTemplate.exchange(url, HttpMethod.GET, new HttpEntity<>(headers), String.class);
-            MealApiResponse responseMeal = restTemplate.getForObject(getAllByFirstLetterUrl, MealApiResponse.class);
+            MealApiResponse responseMeal = restTemplate.getForObject(getRandomMealUrl, MealApiResponse.class);
 
             System.out.println("Output from Meals API: " + responseMeal);
             return responseMeal;
