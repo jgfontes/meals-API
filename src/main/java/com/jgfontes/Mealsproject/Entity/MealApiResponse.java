@@ -7,6 +7,7 @@ import java.util.List;
 
 public class MealApiResponse {
     private List<Meal> meals;
+    public static String[] strAreaArray= {"American", "British", "Canadian", "Chinese", "Dutch", "Egyptian", "French", "Greek", "Indian", "Irish", "Italian", "Jamaican", "Japanese", "Kenyan", "Malaysian", "Mexican", "Moroccan", "Polish", "Portuguese", "Russian", "Spanish", "Thai", "Tunisian", "Turkish", "Unknown", "Vietnamese"};
 
     public List<Meal> getMeals() {
         return meals;

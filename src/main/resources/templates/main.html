@@ -15,34 +15,34 @@
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ENjdO4Dr2bkBIFxQpeoTz1HIcje39Wm4jDKdf19U8gI4ddQ3GYNS7NTKfAdVQSZe" crossorigin="anonymous"></script>
 
         <h3>The recepy which you should try to </h3>
-        <h5 th:text="${helloWorld}">No recipe available for now.</h5>
+        <h5 th:text="${recepyInstructions}">No recipe available for now.</h5>
         <div class="form-check">
             <input class="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault1">
-            <label class="form-check-label" for="flexRadioDefault1">
+            <label class="form-check-label" for="flexRadioDefault1" th:text="${country0}">
                 Option 1
             </label>
         </div>
         <div class="form-check">
             <input class="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault2">
-            <label class="form-check-label" for="flexRadioDefault2">
+            <label class="form-check-label" for="flexRadioDefault2" th:text="${country1}">
                 Option 2
             </label>
         </div>
         <div class="form-check">
             <input class="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault3">
-            <label class="form-check-label" for="flexRadioDefault3">
+            <label class="form-check-label" for="flexRadioDefault3" th:text="${country2}">
                 Option 3
             </label>
         </div>
         <div class="form-check">
             <input class="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault4">
-            <label class="form-check-label" for="flexRadioDefault4">
+            <label class="form-check-label" for="flexRadioDefault4" th:text="${country3}">
                 Option 4
             </label>
         </div>
         <div class="form-check">
             <input class="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault5">
-            <label class="form-check-label" for="flexRadioDefault5">
+            <label class="form-check-label" for="flexRadioDefault5" th:text="${country4}">
                 Option 5
             </label>
         </div>
