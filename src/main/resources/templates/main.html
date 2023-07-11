@@ -16,40 +16,44 @@
 
         <h3>The recepy which you should try to </h3>
         <h5 th:text="${recepyInstructions}">No recipe available for now.</h5>
-        <div class="form-check">
-            <input class="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault1">
-            <label class="form-check-label" for="flexRadioDefault1" th:text="${country0}">
-                Option 1
-            </label>
-        </div>
-        <div class="form-check">
-            <input class="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault2">
-            <label class="form-check-label" for="flexRadioDefault2" th:text="${country1}">
-                Option 2
-            </label>
-        </div>
-        <div class="form-check">
-            <input class="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault3">
-            <label class="form-check-label" for="flexRadioDefault3" th:text="${country2}">
-                Option 3
-            </label>
-        </div>
-        <div class="form-check">
-            <input class="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault4">
-            <label class="form-check-label" for="flexRadioDefault4" th:text="${country3}">
-                Option 4
-            </label>
-        </div>
-        <div class="form-check">
-            <input class="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault5">
-            <label class="form-check-label" for="flexRadioDefault5" th:text="${country4}">
-                Option 5
-            </label>
-        </div>
 
-        <button type="button" class="btn btn-primary">
-            Check Answer
-        </button>
+        <form action="/check-answer" method="POST">
+            <div class="form-check">
+                <input class="form-check-input" type="checkbox" name="alternative1" id="flexRadioDefault1">
+                <label class="form-check-label" for="flexRadioDefault1" th:text="${country0}" th:value="${checkbox1}">
+                    Option 1
+                </label>
+            </div>
+            <div class="form-check">
+                <input class="form-check-input" type="checkbox" name="alternative2" id="flexRadioDefault2">
+                <label class="form-check-label" for="flexRadioDefault2" th:text="${country1}">
+                    Option 2
+                </label>
+            </div>
+            <div class="form-check">
+                <input class="form-check-input" type="checkbox" name="alternative3" id="flexRadioDefault3">
+                <label class="form-check-label" for="flexRadioDefault3" th:text="${country2}">
+                    Option 3
+                </label>
+            </div>
+            <div class="form-check">
+                <input class="form-check-input" type="checkbox" name="alternative4" id="flexRadioDefault4">
+                <label class="form-check-label" for="flexRadioDefault4" th:text="${country3}">
+                    Option 4
+                </label>
+            </div>
+            <div class="form-check">
+                <input class="form-check-input" type="checkbox" name="alternative5" id="flexRadioDefault5">
+                <label class="form-check-label" for="flexRadioDefault5" th:text="${country4}">
+                    Option 5
+                </label>
+            </div>
+
+<!--            <button onclick="location.href='/check-answer'" class="btn btn-primary">-->
+            <button type="submit" class="btn btn-primary">
+                Check Answer
+            </button>
+        </form>
 
     </body>
 </html>

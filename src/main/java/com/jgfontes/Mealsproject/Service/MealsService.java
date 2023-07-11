@@ -22,7 +22,7 @@ public class MealsService {
 //            ResponseEntity<String> response = restTemplate.exchange(url, HttpMethod.GET, new HttpEntity<>(headers), String.class);
             MealApiResponse responseMeal = restTemplate.getForObject(getRandomMealUrl, MealApiResponse.class);
 
-            System.out.println("Output from Meals API: " + responseMeal);
+            System.out.println("Output from Meals API: " + responseMeal.getMeals().get(0).toString());
             return responseMeal;
         } catch (Exception e) {
             System.out.println("Something went wrong getting value from MealsAPI");

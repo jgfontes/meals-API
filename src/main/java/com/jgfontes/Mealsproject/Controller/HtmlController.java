@@ -1,16 +1,18 @@
 package com.jgfontes.Mealsproject.Controller;
 
+import com.jgfontes.Mealsproject.Auxiliar.GamePopulator;
+import com.jgfontes.Mealsproject.Entity.Game;
 import com.jgfontes.Mealsproject.Entity.MealApiResponse;
 import com.jgfontes.Mealsproject.Service.MealsService;
+import jakarta.servlet.http.HttpServletRequest;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.*;
 
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.Random;
+import java.sql.Array;
+import java.util.*;
 
 @Controller
 @RequiredArgsConstructor
@@ -18,39 +20,57 @@ public class HtmlController {
 
     @Autowired
     private final MealsService mealsService;
+    private Game game;
 
     @GetMapping("/")
     public String openHtml(Model model) {
-        //Call MealsAPI and store content into MealApiResponse Entity
-        MealApiResponse meal = (MealApiResponse) mealsService.getRandomMeal();
+        Game game = GamePopulator.populateGame(new Game(), 5, mealsService);
+        String[] strAreaAlternatives = game.getAlternatives().toArray(new String[0]);
+        this.game = game;
+        System.out.println(game);
 
-        //Generate Array with different Areas (Containing the answer)
-        ArrayList strAreaAlternatives = generateCountriesList(meal.getMeals().get(0).getStrArea(), 5);
-        System.out.println("Answer is: " + meal.getMeals().get(0).getStrArea());
-        strAreaAlternatives.stream().forEach(System.out::println);
+        model.addAttribute("recepyInstructions", game.getInstruction());
+        model.addAttribute("country0", strAreaAlternatives[0]);
+        model.addAttribute("country1", strAreaAlternatives[1]);
+        model.addAttribute("country2", strAreaAlternatives[2]);
+        model.addAttribute("country3", strAreaAlternatives[3]);
+        model.addAttribute("country4", strAreaAlternatives[4]);
 
-        model.addAttribute("recepyInstructions", meal.getMeals().get(0).getStrInstructions());
-        model.addAttribute("country0", strAreaAlternatives.get(0));
-        model.addAttribute("country1", strAreaAlternatives.get(1));
-        model.addAttribute("country2", strAreaAlternatives.get(2));
-        model.addAttribute("country3", strAreaAlternatives.get(3));
-        model.addAttribute("country4", strAreaAlternatives.get(4));
         return "main";
     }
 
-    private ArrayList generateCountriesList(String strAreaAnswer, int size) {
-        ArrayList strAreaAlternatives = new ArrayList(size);
-        strAreaAlternatives.add(strAreaAnswer);
-        Random r = new Random();
-
-        while(strAreaAlternatives.size() < size) {
-            String randomArea = MealApiResponse.strAreaArray[r.nextInt(MealApiResponse.strAreaArray.length)];
-            if (!strAreaAlternatives.contains(randomArea)) {
-                strAreaAlternatives.add(randomArea);
+    @PostMapping("/check-answer")
+    public String updateHtml(
+            @RequestParam(defaultValue = "false") boolean alternative1,
+            @RequestParam(defaultValue = "false") boolean alternative2,
+            @RequestParam(defaultValue = "false") boolean alternative3,
+            @RequestParam(defaultValue = "false") boolean alternative4,
+            @RequestParam(defaultValue = "false") boolean alternative5,
+            Model model
+    ) {
+        //Review if there is a better way to fix these ifs
+        int userGuess = 0;
+        boolean[] userAlternatives = {alternative1, alternative2, alternative3, alternative4, alternative5};
+        for (int i = 0; i < userAlternatives.length; i++) {
+            if(userAlternatives[i]) {
+                userGuess=i;
+                System.out.println("User Guess is :" + userGuess);
+                break;
             }
         }
 
-        Collections.shuffle(strAreaAlternatives);
-        return strAreaAlternatives;
+        if(game.getAlternatives().toArray()[userGuess].equals(game.getAnswer())) {
+            System.out.println("Answer Correct!!!!");
+        }
+        System.out.println("Answer wrong");
+
+        model.addAttribute("recepyInstructions", game.getInstruction());
+        model.addAttribute("recepyCountry", game.getAnswer());
+        model.addAttribute("strMealThumb", game.getStrMealThumb());
+        model.addAttribute("strYoutube", game.getStrYoutube());
+        model.addAttribute("strSource", game.getStrSource());
+
+        return "result";
     }
+
 }
