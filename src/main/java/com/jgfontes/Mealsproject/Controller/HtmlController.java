@@ -24,6 +24,7 @@ public class HtmlController {
 
     @GetMapping("/")
     public String openHtml(Model model) {
+        //test
         Game game = GamePopulator.populateGame(new Game(), 5, mealsService);
         String[] strAreaAlternatives = game.getAlternatives().toArray(new String[0]);
         this.game = game;
