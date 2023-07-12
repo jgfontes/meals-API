@@ -59,11 +59,15 @@ public class HtmlController {
             }
         }
 
+        String answer;
         if(game.getAlternatives().toArray()[userGuess].equals(game.getAnswer())) {
             System.out.println("Answer Correct!!!!");
+            answer = "Correct";
+        } else {
+            answer = "Wrong";
         }
-        System.out.println("Answer wrong");
 
+        model.addAttribute("answer", answer);
         model.addAttribute("recepyInstructions", game.getInstruction());
         model.addAttribute("recepyCountry", game.getAnswer());
         model.addAttribute("strMealThumb", game.getStrMealThumb());
