@@ -9,8 +9,6 @@ import java.util.*;
 public class GamePopulator {
 
     public static void main(String[] args) {
-        Game game = populateGame(new Game(), 5, new MealsService());
-        System.out.println(game);
     }
 
     static public Game populateGame(Game game, int size, MealsService mealsService) {
@@ -40,8 +38,6 @@ public class GamePopulator {
         }
 
         strAreaAlternatives.stream().forEach(System.out::println);
-//        Collections.shuffle((List<?>) strAreaAlternatives);
-//        strAreaAlternatives.stream().forEach(System.out::println);
         return strAreaAlternatives;
     }
 }

@@ -49,7 +49,6 @@ public class HtmlController {
             @RequestParam(defaultValue = "false") boolean alternative5,
             Model model
     ) {
-        //Review if there is a better way to fix these ifs
         int userGuess = 0;
         boolean[] userAlternatives = {alternative1, alternative2, alternative3, alternative4, alternative5};
         for (int i = 0; i < userAlternatives.length; i++) {
@@ -62,7 +61,6 @@ public class HtmlController {
 
         String answer;
         if(game.getAlternatives().toArray()[userGuess].equals(game.getAnswer())) {
-            System.out.println("Answer Correct!!!!");
             answer = "Correct";
         } else {
             answer = "Wrong";
